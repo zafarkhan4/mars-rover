@@ -27,6 +27,4 @@ public class East implements Navigation {
     return "E";
   }
 
-  
-  
 }

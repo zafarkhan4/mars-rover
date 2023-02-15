@@ -26,5 +26,5 @@ public class West implements Navigation {
   public String toString() {
     return "W";
   }
-  
+
 }

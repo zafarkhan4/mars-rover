@@ -2,24 +2,20 @@ package com.techreturners;
 
 public class Grid {
 
-  private int xMaxDistance;
-  private int yMaxDistance;
+  private int xBoundary;
+  private int yBoundary;
 
-
-  public Grid(String dimensions) {
-    String[] roverRange = dimensions.split(" ");
-    this.xMaxDistance = Integer.parseInt(roverRange[0]);
-    this.yMaxDistance = Integer.parseInt(roverRange[1]);
+  public Grid(int xBoundary, int yBoundary) {
+    this.xBoundary = xBoundary;
+    this.yBoundary = yBoundary;
   }
 
-
-  public int getxMaxDistance() {
-    return xMaxDistance;
+  public int getxBoundary() {
+    return xBoundary;
   }
 
-
-  public int getyMaxDistance() {
-    return yMaxDistance;
+  public int getyBoundary() {
+    return yBoundary;
   }
-  
+
 }

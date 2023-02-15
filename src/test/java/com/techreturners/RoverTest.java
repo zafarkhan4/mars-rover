@@ -1,9 +1,9 @@
 package com.techreturners;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class RoverTest {
 
@@ -12,14 +12,14 @@ public class RoverTest {
     Rover rover = new Rover();
     String strCoordinates = "1 1 N";
     rover.setCoordinates(strCoordinates);
-    
+
     assertEquals(strCoordinates, rover.getCoordinates());
   }
 
   @Test
   public void checkMoveRoverForLeftRotation() {
     Rover rover = new Rover();
-    rover.setRovingRange("5 5");
+    rover.setGrid("5 5");
     rover.setCoordinates("1 1 N");
     String roverInstructions = "L";
 
@@ -31,7 +31,7 @@ public class RoverTest {
   @Test
   public void checkMoveRoverForLeftRotationFacingSouth() {
     Rover rover = new Rover();
-    rover.setRovingRange("5 5");
+    rover.setGrid("5 5");
     rover.setCoordinates("1 1 S");
     String roverInstructions = "L";
 
@@ -43,7 +43,7 @@ public class RoverTest {
   @Test
   public void checkMoveRoverForRightRotation() {
     Rover rover = new Rover();
-    rover.setRovingRange("5 5");
+    rover.setGrid("5 5");
     rover.setCoordinates("1 1 N");
     String roverInstructions = "R";
 
@@ -55,7 +55,7 @@ public class RoverTest {
   @Test
   public void checkMoveRoverForRightRotationFacingEast() {
     Rover rover = new Rover();
-    rover.setRovingRange("5 5");
+    rover.setGrid("5 5");
     rover.setCoordinates("1 1 E");
     String roverInstructions = "R";
 
@@ -67,7 +67,7 @@ public class RoverTest {
   @Test
   public void checkMoveRoverForForwardMovementFacingEast() {
     Rover rover = new Rover();
-    rover.setRovingRange("5 5");
+    rover.setGrid("5 5");
     rover.setCoordinates("1 1 E");
     String roverInstructions = "M";
 
@@ -77,9 +77,86 @@ public class RoverTest {
   }
 
   @Test
+  public void checkSetGridForEmptyInput() {
+
+    Rover rover = new Rover();
+
+    Exception exception = assertThrows(IllegalArgumentException.class, () -> rover.setGrid(" "));
+
+    assertEquals("Empty dimensions. Please provide valid dimensions.", exception.getMessage());
+  }
+
+  @Test
+  public void checkSetGridForNullInput() {
+
+    Rover rover = new Rover();
+
+    Exception exception = assertThrows(IllegalArgumentException.class, () -> rover.setGrid(null));
+
+    assertEquals("Empty dimensions. Please provide valid dimensions.", exception.getMessage());
+  }
+
+  @Test
+  public void checkSetGridForInvalidNumber() {
+
+    Rover rover = new Rover();
+    String input = "z 2";
+
+    Exception exception = assertThrows(IllegalArgumentException.class, () -> rover.setGrid(input));
+
+    assertEquals("Please provide valid integer for position.", exception.getMessage());
+  }
+
+  @Test
+  public void checkSetCoordinatesForEmptyInput() {
+
+    Rover rover = new Rover();
+
+    Exception exception = assertThrows(IllegalArgumentException.class, () -> rover.setCoordinates(" "));
+
+    assertEquals("Empty co-ordinates. Please provide valid coordinates.", exception.getMessage());
+  }
+
+  @Test
+  public void checkSetCoordinatesForNullInput() {
+
+    Rover rover = new Rover();
+
+    String input = null;
+
+    Exception exception = assertThrows(IllegalArgumentException.class, () -> rover.setCoordinates(input));
+
+    assertEquals("Empty co-ordinates. Please provide valid coordinates.", exception.getMessage());
+  }
+
+  @Test
+  public void checkSetCoordinatesForInvalidNumber() {
+
+    Rover rover = new Rover();
+    String input = "z 2 E";
+
+    Exception exception = assertThrows(IllegalArgumentException.class, () -> rover.setCoordinates(input));
+
+    assertEquals("Please provide valid integer for position", exception.getMessage());
+  }
+
+  @Test
+  public void checkMoveRoverForInvalidInstruction() {
+
+    Rover rover = new Rover();
+    rover.setGrid("5 5");
+    rover.setCoordinates("1 2 N");
+    String roverInstructions = "KLMLMLMLMM";
+
+    Exception exception = assertThrows(IllegalArgumentException.class, () -> rover.moveRover(roverInstructions));
+
+    assertEquals("Invalid instruction. At this point I only understand \"L\", \"R\", \"M\"  ", exception.getMessage());
+  }
+
+  @Test
   public void checkMoveRoverFor() {
     Rover rover = new Rover();
-    rover.setRovingRange("5 5");
+    rover.setGrid("5 5");
     rover.setCoordinates("1 2 N");
     String roverInstructions = "LMLMLMLMM";
 
@@ -91,7 +168,7 @@ public class RoverTest {
   @Test
   public void checkMoveRoverFor1() {
     Rover rover = new Rover();
-    rover.setRovingRange("5 5");
+    rover.setGrid("5 5");
     rover.setCoordinates("3 3 E");
     String roverInstructions = "MMRMMRMRRM";
 
@@ -99,6 +176,5 @@ public class RoverTest {
 
     assertEquals(expectedCoordinates, rover.moveRover(roverInstructions));
   }
-
 
 }

@@ -1,10 +1,6 @@
 package com.techreturners;
 
-import com.techreturners.navigation.East;
 import com.techreturners.navigation.Navigation;
-import com.techreturners.navigation.North;
-import com.techreturners.navigation.South;
-import com.techreturners.navigation.West;
 
 public class Coordinates {
 
@@ -12,40 +8,23 @@ public class Coordinates {
   private int yPosition;
   private Navigation navigation;
 
-  public Coordinates(String strCoordinates) {
-    String[] coordinates = strCoordinates.split(" ");
-    this.xPosition = Integer.parseInt(coordinates[0]);
-    this.yPosition = Integer.parseInt(coordinates[1]);
-    this.navigation = setNavigationDirection(coordinates[2]);
+  public Coordinates(int xPosition, int yPosition, Navigation navigation) {
+    this.xPosition = xPosition;
+    this.yPosition = yPosition;
+    this.navigation = navigation;
   }
-
-  private Navigation setNavigationDirection(String direction) {
-    if(direction.equalsIgnoreCase("E")) {
-      return new East();
-    } else if (direction.equalsIgnoreCase("W")) {
-      return new West();
-    } else if (direction.equalsIgnoreCase("N")) {
-      return new North();
-    } else {
-      return new South();
-    }
-  }
-
 
   public void setxPosition(int xPosition) {
     this.xPosition = xPosition;
   }
 
-
   public void setyPosition(int yPosition) {
     this.yPosition = yPosition;
   }
 
-
   public void setNavigation(Navigation navigation) {
     this.navigation = navigation;
   }
-
 
   public int getxPosition() {
     return this.xPosition;

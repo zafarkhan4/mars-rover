@@ -3,7 +3,7 @@ package com.techreturners.navigation;
 import com.techreturners.Coordinates;
 import com.techreturners.Grid;
 
-public class South implements Navigation{
+public class South implements Navigation {
 
   @Override
   public boolean moveForward(Coordinates coordinates, Grid grid) {
@@ -15,13 +15,13 @@ public class South implements Navigation{
   @Override
   public void rotateLeft(Coordinates coordinates) {
     coordinates.setNavigation(new East());
-    
+
   }
 
   @Override
   public void rotateRight(Coordinates coordinates) {
     coordinates.setNavigation(new West());
-    
+
   }
 
   @Override
