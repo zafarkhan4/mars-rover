@@ -2,24 +2,19 @@ package com.techreturners;
 
 public class Rover {
 
-  private int[] rovingRange = new int[2];
-  private RoverCoordinates coordinates;
+  private Grid grid;
+  private Coordinates coordinates;
 
-  public void setRovingRange(String string) {
-    String[] roverRange = string.split(" ");
-    
-    for(int i=0; i<roverRange.length; i++) {
-      rovingRange[i] = Integer.parseInt(roverRange[i]);
-    }
-
+  public void setRovingRange(String dimensions) {
+    this.grid = new Grid(dimensions);
   }
 
-  public int[] getRovingRange() {
-    return rovingRange;
+  public Grid getRovingRange() {
+    return this.grid;
   }
 
   public void setCoordinates(String strCoordinates) {
-    coordinates = new RoverCoordinates(strCoordinates);
+    coordinates = new Coordinates(strCoordinates);
   }
 
   public String getCoordinates() {
@@ -28,18 +23,20 @@ public class Rover {
 
   public String moveRover(String roverInstructions) {
 
-    char [] instructions = roverInstructions.toCharArray();
+    char[] instructions = roverInstructions.toCharArray();
 
-    for(char instruction: instructions) {
+    for (char instruction : instructions) {
 
       if (Character.compare(instruction, 'M') == 0) {
-        coordinates.moveForward(roverInstructions);
-      } else {
-        coordinates.rotate(roverInstructions);
+        this.coordinates.getNavigation().moveForward(coordinates, grid);
+      } else if (Character.compare(instruction, 'L') == 0) {
+        this.coordinates.getNavigation().rotateLeft(coordinates);
+      } else if (Character.compare(instruction, 'R') == 0) {
+        this.coordinates.getNavigation().rotateRight(coordinates);
       }
     }
 
     return getCoordinates();
   }
-  
+
 }

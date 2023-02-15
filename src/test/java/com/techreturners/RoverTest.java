@@ -6,14 +6,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 public class RoverTest {
-  
-  @Test
-  public void checkSetRovingRange() {
-    Rover rover = new Rover();
-    int[] expectedRovingRange = {5, 5};
-    rover.setRovingRange("5 5");
-    assertArrayEquals(expectedRovingRange, rover.getRovingRange());
-  }
 
   @Test
   public void checkSetRoverCoordinates() {
