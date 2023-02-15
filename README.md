@@ -21,6 +21,7 @@ for example if grid size is (3, 3) the max distance along x-axis is 3
 * The grid dimensions are two dimensional
 * Initial co-ordinates are provided with rover facing directions
 * All the inputs are strings and space seperated
+* The grid can be square or rectangle
 
 Running
 -------
@@ -32,4 +33,8 @@ mvn test
 ```
 
 Currently only the run through test cases
-TBD - userInput
+
+Future plan
+-----------
+* Add support for userinput
+* Add support for different for other plateau shapes
