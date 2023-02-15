@@ -27,14 +27,19 @@ public class Rover {
   }
 
   public String moveRover(String roverInstructions) {
-    
-    if (roverInstructions.equalsIgnoreCase("M")) {
-      coordinates.moveForward(roverInstructions);
-    }
-    
-    coordinates.rotate(roverInstructions);
 
-    return coordinates.toString();
+    char [] instructions = roverInstructions.toCharArray();
+
+    for(char instruction: instructions) {
+
+      if (Character.compare(instruction, 'M') == 0) {
+        coordinates.moveForward(roverInstructions);
+      } else {
+        coordinates.rotate(roverInstructions);
+      }
+    }
+
+    return getCoordinates();
   }
   
 }
