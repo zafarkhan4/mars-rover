@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class RoverTest {
 
@@ -153,26 +155,28 @@ public class RoverTest {
     assertEquals("Invalid instruction. At this point I only understand \"L\", \"R\", \"M\"  ", exception.getMessage());
   }
 
+  @ParameterizedTest
+  @CsvSource({"5 5, 0 0 N, LM", "5 5, 4 4 N, M", "5 5, 4 0 S, M", "5 5, 4 4 E, M", "5 5, 3 3 E, MMRMMRMRRM"})
+  public void checkMoveRoverForOutOfGrid(String dimensions, String initialCoordinates, String roverInstruction) {
+    Rover rover = new Rover();
+    rover.setGrid(dimensions);
+    rover.setCoordinates(initialCoordinates);
+    String roverInstructions = roverInstruction;
+
+    Exception exception = assertThrows(IllegalArgumentException.class, () -> rover.moveRover(roverInstructions));
+
+    assertEquals("I have reached grid boundary.", exception.getMessage());
+
+  }
+
   @Test
-  public void checkMoveRoverFor() {
+  public void checkMoveRoverForRandomInput() {
     Rover rover = new Rover();
     rover.setGrid("5 5");
     rover.setCoordinates("1 2 N");
     String roverInstructions = "LMLMLMLMM";
 
     String expectedCoordinates = "1 3 N";
-
-    assertEquals(expectedCoordinates, rover.moveRover(roverInstructions));
-  }
-
-  @Test
-  public void checkMoveRoverFor1() {
-    Rover rover = new Rover();
-    rover.setGrid("5 5");
-    rover.setCoordinates("3 3 E");
-    String roverInstructions = "MMRMMRMRRM";
-
-    String expectedCoordinates = "5 1 E";
 
     assertEquals(expectedCoordinates, rover.moveRover(roverInstructions));
   }

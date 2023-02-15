@@ -8,6 +8,9 @@ public class West implements Navigation {
   @Override
   public boolean moveForward(Coordinates coordinates, Grid grid) {
     int updatedPosition = coordinates.getxPosition() - 1;
+    if(updatedPosition < grid.getxLowerBoundary()) {
+      throw new IllegalArgumentException("I have reached grid boundary.");
+    }
     coordinates.setxPosition(updatedPosition);
     return false;
   }

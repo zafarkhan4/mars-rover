@@ -8,6 +8,11 @@ public class South implements Navigation {
   @Override
   public boolean moveForward(Coordinates coordinates, Grid grid) {
     int updatedPosition = coordinates.getyPosition() - 1;
+
+    if(updatedPosition < grid.getxLowerBoundary()) {
+      throw new IllegalArgumentException("I have reached grid boundary.");
+    }
+    
     coordinates.setyPosition(updatedPosition);
     return false;
   }
