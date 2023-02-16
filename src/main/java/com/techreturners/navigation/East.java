@@ -10,8 +10,6 @@ public class East implements Navigation {
     int updatedPosition = coordinates.getxPosition() + 1;
     
     if(updatedPosition == grid.getxBoundary()) {
-      System.out.println("***************");
-      System.out.println(updatedPosition);
       throw new IllegalArgumentException("I have reached grid boundary.");
     }
 
